@@ -6,7 +6,6 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from django.http import Http404
 from .serializers import ServiceAreaSerializer
 
 from .models import ServiceArea
@@ -16,7 +15,7 @@ class ServiceAreaList(APIView):
     """
     Returns list
     """
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated,]
 
     def get_userid(self, request):
         print('request:', request)
@@ -25,7 +24,6 @@ class ServiceAreaList(APIView):
         if response:
             user, token = response
             user_id = token.payload.get('user_id')
-            print('user_id: ', user_id)
             return user_id
 
     def get(self, request, format=None):
@@ -40,6 +38,7 @@ class ServiceAreaList(APIView):
 
     def post(self, request, format=None):
         user_id = self.get_userid(request)
+        print('request: ', request)
         print('user_id: ', user_id)
         serializer = ServiceAreaSerializer(data=request.data)
         if serializer.is_valid():
@@ -52,7 +51,7 @@ class ServiceAreaDetail(APIView):
     """
     Returns list of detail
     """
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def get_userid(self, request):
         print('request: ',request)
