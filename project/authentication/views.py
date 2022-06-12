@@ -50,7 +50,7 @@ class CustomUserDetail(APIView):
     """
     Get, put and delete by id
     """
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = [IsAuthenticated,]
 
     def get_object(self, pk):
         try:
