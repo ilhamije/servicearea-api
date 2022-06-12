@@ -7,7 +7,6 @@ from .views import (CustomUserCreate, CustomUserList, CustomUserDetail,
 
 app_name = "auth"
 
-
 urlpatterns = [
     path('providers', CustomUserCreate.as_view(), name="providers_create"),
     path('providers/', CustomUserList.as_view(), name="providers_list"),
