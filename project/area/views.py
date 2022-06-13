@@ -1,4 +1,5 @@
 from abc import ABC
+from curses import KEY_A1
 from typing import Any
 from django.http import Http404
 
@@ -39,7 +40,6 @@ class ServiceAreaByUser(APIView, CommonProcess):
 
     def get(self, request, format=None):
         user_id = self.get_userid(request)
-        # area = self.get_object(user_id)
         area = ServiceArea.objects.all()
         serializer = ServiceAreaSerializer(area)
         return Response(serializer.data)
@@ -47,7 +47,7 @@ class ServiceAreaByUser(APIView, CommonProcess):
 
 class ServiceAreaList(APIView, CommonProcess):
     """
-    Returns list
+    Returns list of Service Area
     """
     permission_classes = [IsAuthenticated,]
 
@@ -101,3 +101,26 @@ class ServiceAreaDetail(APIView, CommonProcess):
         area = self.get_object(user_id, pk)
         area.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class PolygonByUser(APIView):
+    """
+    Returns list of polygon
+    """
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self, latlng):
+        try:
+            latlng = float(latlng)
+            result = ServiceArea.objects.filter(geojson_data__contains=
+                    {"coordinates": [[latlng]]})[0]
+        except Exception as e:
+            raise Http404
+        else:
+            return result
+
+    def get(self, *args, **kwargs):
+        latlng = self.kwargs['latlng']
+        area = self.get_object(latlng)
+        serializer = ServiceAreaSerializer(area)
+        return Response(serializer.data)
