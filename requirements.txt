@@ -5,3 +5,5 @@ djangorestframework-simplejwt==4.8.0
 django-jsonfield
 requests
 psycopg2
+django-rest-swagger
+drf-yasg
