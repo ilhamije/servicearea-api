@@ -7,19 +7,16 @@ $ git clone git@gitlab.com:ilhamije/referral-system.git
 $ cd referral-system
 ```
 
-<br >
-## Preparing the SuperUser / Admin Account. 
-<br>
-### create superuser. 
-On Terminal 1
+### create superuser.  
+#### On Terminal 1.  
 ```
-./manage.py createsuperuser  
+$ ./manage.py createsuperuser  
 Email address: admin@domain.com  
 Name: Admin  
 Password: very-secured-pswd  
 ```
 
-### Run on psql.  
+#### Run on psql.  
 Database  
 ```
 CREATE USER prosa_user WITH PASSWORD 'prosa_pass';
