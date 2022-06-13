@@ -3,8 +3,8 @@ API to manage Polygon of Service Area
 
 ### Clone
 ```
-$ git clone git@gitlab.com:ilhamije/referral-system.git
-$ cd referral-system
+$ git clone git@github.com:ilhamije/servicearea-api.git
+$ cd servicearea-api
 ```
 
 ### create superuser.  
@@ -30,6 +30,16 @@ Admin Account
 UPDATE authentication_customuser
 SET is_staff = 1
 WHERE email = 'admin@domain.com';
+```
+
+### Run on local machine
+```
+$ ./manage.py runserver
+```
+
+### Documentation
+```
+http://localhost:8000/docs/
 ```
 
 
