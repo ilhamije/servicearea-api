@@ -6,12 +6,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
-
-from .serializers import (MyTokenObtainPairSerializer,
-                        CustomUserSerializer)
-                        # UseruniqSerializer)
+from .serializers import (MyTokenObtainPairSerializer, CustomUserSerializer)
 from .models import CustomUser
 
 
@@ -30,7 +26,6 @@ class CustomUserCreate(APIView):
                 }
                 json.update(serializer.data)
                 return Response(json, status=status.HTTP_201_CREATED)
-        # print(serializer.errors)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -38,7 +33,7 @@ class CustomUserList(APIView):
     """
     Returns list of Users
     """
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         custom_user = CustomUser.objects.all()

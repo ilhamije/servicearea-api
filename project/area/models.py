@@ -9,3 +9,6 @@ class ServiceArea(models.Model):
     geojson_data = models.JSONField()
     user = models.ForeignKey(
         CustomUser, related_name='servicearea', on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return '{}'.format(self.id)

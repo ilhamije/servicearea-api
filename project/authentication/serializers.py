@@ -1,10 +1,7 @@
-from gettext import install
 from typing import Any, Dict
 from django.utils.translation import ugettext_lazy as _
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rest_framework.validators import UniqueValidator
-from rest_framework.exceptions import ValidationError
 from rest_framework import serializers
 
 from .models import CustomUser
@@ -17,7 +14,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
         Manage Provider User
         """
         model = CustomUser
-        fields = [ 'name', 'email', 'phone_number', 'language', 'currency' ]
+        fields = ['name', 'email', 'phone_number',
+                'language', 'currency']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data: Any):
@@ -44,7 +42,6 @@ class CustomUserSerializer(serializers.ModelSerializer):
         data['phone_number'] = instance.phone_number
         data['language'] = instance.language
         data['currency'] = instance.currency
-        # add link to its service area
         return data
 
     # update function need email / password validation

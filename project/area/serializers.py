@@ -23,9 +23,6 @@ class ServiceAreaSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return ServiceArea.objects.create(**validated_data)
 
-    # def get_absolute_url(self, obj):
-    #     return reverse('servicearea_detail',kwargs={'pk': obj.id})
-
     def to_representation(self, instance: ServiceArea) -> Dict:
         data = dict()
         data['id'] = instance.id
