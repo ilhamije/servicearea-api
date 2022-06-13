@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -85,13 +86,13 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'prosa_db',
-        'USER': 'prosa_user',
-        'PASSWORD': 'prosa_pass',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'NAME': os.environ.get("MY_DATABASE"),
+        'USER': os.environ.get("MY_USER"),
+        'PASSWORD': os.environ.get("MY_PASS"),
+        'HOST': os.environ.get("MY_HOST"),
+        'PORT': os.environ.get("MY_PORT"),
         'TEST': {
-            'NAME': 'test_prosa_db',
+            'NAME': os.environ.get("MY_TEST_DATABASE"),
         },
     }
 }
